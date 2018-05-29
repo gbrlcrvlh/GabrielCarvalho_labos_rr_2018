@@ -99,11 +99,11 @@ void main(){
 
 	for(i=0;i<N;i++){
 		printf("\n For P[%d]",i);
-    	for(j=0;j<M;j++){
-        	printf("\n> ");
-        	scanf("%d",&instancia);
-        	maximo[i][j]=instancia;              
-     	}
+		for(j=0;j<M;j++){
+			printf("\n> ");
+			scanf("%d",&instancia);
+			maximo[i][j]=instancia;              
+		}
 	}	    
 
 	printf("\nNumero de instancias alocadas:\n");
@@ -111,29 +111,29 @@ void main(){
 	for(i=0;i<N;i++){
 		printf("\n For P[%d]",i);
 		for(j=0;j<M;j++){
-        	printf("\n> ");
-        	scanf("%d",&instancia);
-        	alocado[i][j]=instancia;
-        	necessidade[i][j]=maximo[i][j]-alocado[i][j];
-    	} 
+			printf("\n> ");
+			scanf("%d",&instancia);
+			alocado[i][j]=instancia;
+			necessidade[i][j]=maximo[i][j]-alocado[i][j];
+		} 
 	}
     printf("\nSequencia segura e:");
     
     while(count1!=N){
 		count2=count1;
 		for(i=0;i<N;i++){
-        	for(j=0;j<M;j++){
-            	if(necessidade[i][j]<=disponivel[j]){
-            	k++;
-              	}  
-        	}    
-        	if(k==M && completo[i]==0 ){
-           		printf("P[%d] ",i);
-           		completo[i]=1;
-           		for(j=0;j<M;j++){
-               		disponivel[j]=disponivel[j]+alocado[i][j];
-              	} 
-            	count1++;
+			for(j=0;j<M;j++){
+				if(necessidade[i][j]<=disponivel[j]){
+					k++;
+				}  
+        		}    
+			if(k==M && completo[i]==0 ){
+				printf("P[%d] ",i);
+				completo[i]=1;
+				for(j=0;j<M;j++){
+					disponivel[j]=disponivel[j]+alocado[i][j];
+				} 
+            		count1++;
          	}
          	k=0;
        }
