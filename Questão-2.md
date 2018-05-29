@@ -69,6 +69,85 @@ volte para o passo 2
 
 4. Sistema seguro -> **FIM**
   
+### Algoritmo:
+~~~~
+#include<stdio.h>  
+#include<conio.h>
+
+void main(){
+	int N,M,i,j,instancia,k=0,count1=0,count2=0;
+	printf("Numero de processos:\n> ");
+	scanf("%d",&N);
+	printf("Numero de recursos:\n> ");
+	scanf("%d",&M);
+  
+	int disponivel[M],maximo[N][M],alocado[N][M],necessidade[N][M],completo[N];
+
+	for(i=0;i<N;i++){
+		completo[i]=0;
+	}
+
+	printf("\nNumero de instancias disponiveis:");
+
+	for(i=0;i<M;i++){
+		printf("\n> ");
+		scanf("%d",&instancia);
+		disponivel[i]=instancia;
+	}
+
+	printf("\nNumero maximo de instancia de recursos que o processo necessita:");
+
+	for(i=0;i<N;i++){
+		printf("\n For P[%d]",i);
+    	for(j=0;j<M;j++){
+        	printf("\n> ");
+        	scanf("%d",&instancia);
+        	maximo[i][j]=instancia;              
+     	}
+	}	    
+
+	printf("\nNumero de instancias alocadas:\n");
+
+	for(i=0;i<N;i++){
+		printf("\n For P[%d]",i);
+		for(j=0;j<M;j++){
+        	printf("\n> ");
+        	scanf("%d",&instancia);
+        	alocado[i][j]=instancia;
+        	necessidade[i][j]=maximo[i][j]-alocado[i][j];
+    	} 
+	}
+    printf("\nSequencia segura e:");
+    
+    while(count1!=N){
+		count2=count1;
+		for(i=0;i<N;i++){
+        	for(j=0;j<M;j++){
+            	if(necessidade[i][j]<=disponivel[j]){
+            	k++;
+              	}  
+        	}    
+        	if(k==M && completo[i]==0 ){
+           		printf("P[%d] ",i);
+           		completo[i]=1;
+           		for(j=0;j<M;j++){
+               		disponivel[j]=disponivel[j]+alocado[i][j];
+              	} 
+            	count1++;
+         	}
+         	k=0;
+       }
+    
+    	if(count1==count2){
+        	printf("\t\tPara..Deadlock\n");
+        	break;
+       	} 
+    }
+    getch();
+}
+~~~~
+
 Disponível em: https://www.studytonight.com/operating-system/bankers-algorithm  
 Disponível em: https://pt.wikipedia.org/wiki/Algoritmo_do_banqueiro  
 Disponível em: http://homepages.dcc.ufmg.br/~dorgival/slides/so/08-deadlocks-6pp.pdf
+Disponível em: https://stackoverflow.com/questions/15501861/bankers-algorithm-for-deadlock-avoidance-in-c
